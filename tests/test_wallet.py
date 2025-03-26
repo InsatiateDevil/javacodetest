@@ -7,14 +7,14 @@ WALLET_ID = ''
 @pytest.mark.asyncio(loop_scope="session")
 async def test_create_wallet(async_client: AsyncClient):
     global WALLET_ID
-    response = await async_client.get("/api/v1/wallet/create_wallet")
+    response = await async_client.get("/api/v1/wallets/create_wallet")
     assert response.status_code == 200
     WALLET_ID = response.json()['id']
 
 
 @pytest.mark.asyncio(loop_scope="session")
 async def test_get_wallet_info(async_client: AsyncClient):
-    response = await async_client.get(f"/api/v1/wallet/{WALLET_ID}")
+    response = await async_client.get(f"/api/v1/wallets/{WALLET_ID}")
     assert response.json() == {'balance': '0.0'}
     assert response.status_code == 200
 
