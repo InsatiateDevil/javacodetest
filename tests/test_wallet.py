@@ -26,12 +26,14 @@ async def test_perform_deposit(async_client: AsyncClient):
         "amount": 200.05
     }
     response = await async_client.post(f"/api/v1/wallet/{WALLET_ID}/operations", json=data)
+    assert response.json() == {'balance': '200.05'}
     assert response.status_code == 200
 
 
 @pytest.mark.asyncio(loop_scope="session")
 async def test_get_balance(async_client: AsyncClient):
     response = await async_client.get(f"/api/v1/wallet/{WALLET_ID}")
+    assert response.json() == {'balance': '200.05'}
     assert response.status_code == 200
 
 
@@ -42,6 +44,7 @@ async def test_perform_withdraw(async_client: AsyncClient):
         "amount": 200
     }
     response = await async_client.post(f"/api/v1/wallet/{WALLET_ID}/operations", json=data)
+    assert response.json() == {'balance': '0.05'}
     assert response.status_code == 200
 
 
