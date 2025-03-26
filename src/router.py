@@ -25,7 +25,7 @@ async def get_new_wallet(
 
 
 @router.post(
-    "/{wallet_id}/operations",
+    "/{wallet_id}/operation",
     response_model=BalanceOut,
     summary="Проведение операций с кошельком"
 )
